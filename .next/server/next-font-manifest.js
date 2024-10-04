@@ -1,1 +1,0 @@
-self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/Kenya/Project/My Portfolio/app/app/[lng]/layout\":[\"static/media/a34f9d1faa5f3315-s.p.woff2\",\"static/media/6c1d3e1a02c4bd06-s.p.woff2\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"
