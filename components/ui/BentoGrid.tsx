@@ -46,7 +46,7 @@ export const BentoGridItem = ({
 
   // Jsのnavigatorと、clipboardとwriteTextってなんだっけ？
   const handleCopy = () => {
-    navigator.clipboard.writeText("igot.never.1225@gmail.com");
+    navigator.clipboard.writeText("kenya@kenglobaltech.com");
     setCopied(true);
   };
 

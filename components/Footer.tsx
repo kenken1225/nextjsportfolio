@@ -23,7 +23,7 @@ export default async function Footer({ params: { lng } }: FooterProps) {
       <div className="flex flex-col items-center">
         <h1 className="heading lg:max-w-[55vw]">{t("title")}</h1>
         <p className="text-white-200 md:mt-10 my-5 text-center">{t("subtitle")}</p>
-        <a href="maito:igot.never.1015@gmail.com">
+        <a href="mailto:kenya@kenglobaltech.com?subject=How can I help you:)&body=Let's do a wonderful project together!">
           <MagicButton title={t("contact")} icon={<FaLocationArrow />} position="right" />
         </a>
       </div>
