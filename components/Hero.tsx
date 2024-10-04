@@ -28,7 +28,7 @@ export default async function Hero({ params: { lng } }: HeroProps) {
       <div className="flex justify-center relative my-20 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[50vw] gap-3 flex flex-col items-center justify-center">
           <h2 className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-            Ken's Official Website
+            Ken&apos;s Official Website
           </h2>
 
           <TextGenerateEffect className="text-center text-[40px] md:text-5xl lg:text-6xl" words={t("title")} />
