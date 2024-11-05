@@ -1,14 +1,18 @@
 import React from "react";
 import InfiniteMovingCards from "./ui/InfiniteMovingCards";
 import { testimonials } from "@/data";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
-import { useTranslation } from "@/app/i18n/client";
+import { useTranslation } from "@/app/i18n";
 
 type ClientsProps = {
   params: { lng: string };
 };
 
-const Clients = ({ params: { lng } }: ClientsProps) => {
+export default async function Clients({ params: { lng } }: ClientsProps) {
+  if (lng === "favicon.ico") {
+    return null;
+  }
+  const { t } = await useTranslation(lng, "Clients");
+  console.log("Clients - Current language:", lng);
   return (
     <div className="py-20" id="testimonials">
       <h1 className="heading mb-10">
@@ -16,7 +20,7 @@ const Clients = ({ params: { lng } }: ClientsProps) => {
         <span className="text-purple"> satisfied clients </span>
       </h1>
       <div className="flex flex-col items-center max-lg:mt-10">
-        <InfiniteMovingCards items={testimonials} direction="right" speed="slow" params={{ lng }} />
+        <InfiniteMovingCards items={testimonials} direction="right" speed="slow" params={{ lng }} lng={lng} />
       </div>
 
       {/* Comapnies Logos */}
@@ -30,6 +34,4 @@ const Clients = ({ params: { lng } }: ClientsProps) => {
             </div> */}
     </div>
   );
-};
-
-export default Clients;
+}

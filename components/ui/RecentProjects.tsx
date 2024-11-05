@@ -1,6 +1,6 @@
 import { projects } from "@/data";
 import React from "react";
-import { div } from "three/examples/jsm/nodes/Nodes.js";
+import { div, log, log2 } from "three/examples/jsm/nodes/Nodes.js";
 import { PinContainer } from "./pin";
 import { FaLocationArrow } from "react-icons/fa";
 import { useTranslation } from "@/app/i18n";

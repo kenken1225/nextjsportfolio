@@ -8,6 +8,7 @@ import resourcesToBackend from "i18next-resources-to-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { getOptions, languages } from "@/app/i18n/setting";
 
+// サーバーサイドかどうかを判定
 const runsOnServerSide = typeof window === "undefined";
 
 //

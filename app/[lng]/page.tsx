@@ -1,12 +1,9 @@
 import Grid from "@/components/Grid";
 import Hero from "@/components/Hero";
-import { BentoGrid } from "@/components/ui/BentoGrid";
 import Clients from "@/components/Clients";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import RecentProjects from "@/components/ui/RecentProjects";
 import { navItems } from "@/data";
-import Image from "next/image";
-import { FaHome } from "react-icons/fa";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
 
