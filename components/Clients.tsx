@@ -8,9 +8,6 @@ type ClientsProps = {
 };
 
 export default async function Clients({ params: { lng } }: ClientsProps) {
-  if (lng === "favicon.icon") {
-    return null;
-  }
   const { t } = await useTranslation(lng, "Clients");
   console.log("Clients - Current language:", lng);
   return (
