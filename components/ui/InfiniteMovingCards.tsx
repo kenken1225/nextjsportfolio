@@ -3,7 +3,6 @@
 import { cn } from "@/utils/cn";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
-import { log } from "three/examples/jsm/nodes/Nodes.js";
 
 type InfiniteMovingCards = {
   params: { lng: string };
@@ -12,7 +11,7 @@ type InfiniteMovingCards = {
 export default function InfiniteMovingCards({
   items,
   direction = "left",
-  speed = "fast",
+  speed = "normal",
   pauseOnHover = true,
   className,
   lng,
@@ -30,40 +29,53 @@ export default function InfiniteMovingCards({
   lng: string;
 } & InfiniteMovingCards) {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const scrollerRef = React.useRef<HTMLUListElement>(null);
   const { i18n, t } = useTranslation(lng, "Clients");
+
+  // 翻訳の状態管理
+  const [scrollerItems, setScrollerItems] = useState(items);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     const changeLanguage = async () => {
-      console.log("Changing language to:", lng);
       await i18n.changeLanguage(lng); // 非同期処理を待機
-      console.log("i18n language updated to:", i18n.language);
+      updateScrollerItems();
     };
 
     changeLanguage();
   }, [lng]);
 
+  // アニメーション設定用の関数
   useEffect(() => {
-    addAnimation();
+    getDirection();
+    getSpeed();
+    setStart(true);
   }, []);
 
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
+  //scrollerItemsを複製してセットする関数
+  const updateScrollerItems = () => {
+    setScrollerItems([...items, ...items]);
+  };
 
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+  // useEffect(() => {
+  //   addAnimation();
+  // }, []);
 
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
+  // function addAnimation() {
+  //   if (containerRef.current && scrollerRef.current) {
+  //     const scrollerContent = Array.from(scrollerRef.current.children);
+
+  //     scrollerContent.forEach((item) => {
+  //       const duplicatedItem = item.cloneNode(true);
+  //       if (scrollerRef.current) {
+  //         scrollerRef.current.appendChild(duplicatedItem);
+  //       }
+  //     });
+
+  //     getDirection();
+  //     getSpeed();
+  //     setStart(true);
+  //   }
+  // }
 
   const getDirection = () => {
     if (containerRef.current) {
@@ -89,21 +101,20 @@ export default function InfiniteMovingCards({
 
   return (
     <div
-      // ref={containerRef}
+      ref={containerRef}
       className={cn(
         "scroller relative z-20  w-screen overflow-hidden  [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         className
       )}
     >
       <ul
-        ref={scrollerRef}
         className={cn(
           " flex min-w-full shrink-0 gap-16 py-4 w-max flex-nowrap",
           start && "animate-scroll ",
           pauseOnHover && "hover:[animation-play-state:paused]"
         )}
       >
-        {items.map((item, idx) => (
+        {scrollerItems.map((item, idx) => (
           <li
             className="w-[90vw] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0 border-slate-800 p-5 md:p-16 md:w-[60vw]"
             style={{
@@ -122,7 +133,8 @@ export default function InfiniteMovingCards({
                 suppressHydrationWarning
                 className=" relative z-20 text-sm md:text-lg leading-[1.6] text-white font-normal"
               >
-                {t(`quote${idx + 1}`) || item.quote}
+                {t(`quote${(idx % items.length) + 1}`) || item.quote}
+                {/* {t(`quote${idx + 1}`) || item.quote} */}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
@@ -130,8 +142,13 @@ export default function InfiniteMovingCards({
                     <img className="rounded-full" src={item.img} alt={item.title} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <span className=" text-xl leading-[1.6] text-white font-bold"> {t(`name${idx + 1}`)}</span>
-                    <span className=" text-sm leading-[1.6] text-white-200 font-normal"> {t(`title${idx + 1}`)}</span>
+                    <span className=" text-xl leading-[1.6] text-white font-bold">
+                      {" "}
+                      {t(`name${(idx % items.length) + 1}`)}
+                    </span>
+                    <span className=" text-sm leading-[1.6] text-white-200 font-normal">
+                      {t(`title${(idx % items.length) + 1}`)}
+                    </span>
                   </div>
                 </span>
               </div>
