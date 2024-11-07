@@ -56,27 +56,6 @@ export default function InfiniteMovingCards({
     setScrollerItems([...items, ...items]);
   };
 
-  // useEffect(() => {
-  //   addAnimation();
-  // }, []);
-
-  // function addAnimation() {
-  //   if (containerRef.current && scrollerRef.current) {
-  //     const scrollerContent = Array.from(scrollerRef.current.children);
-
-  //     scrollerContent.forEach((item) => {
-  //       const duplicatedItem = item.cloneNode(true);
-  //       if (scrollerRef.current) {
-  //         scrollerRef.current.appendChild(duplicatedItem);
-  //       }
-  //     });
-
-  //     getDirection();
-  //     getSpeed();
-  //     setStart(true);
-  //   }
-  // }
-
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -128,13 +107,11 @@ export default function InfiniteMovingCards({
                 aria-hidden="true"
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
-              {/* <span>{t(`quote${idx + 1}`) || item.quote}</span> */}
               <span
                 suppressHydrationWarning
                 className=" relative z-20 text-sm md:text-lg leading-[1.6] text-white font-normal"
               >
                 {t(`quote${(idx % items.length) + 1}`) || item.quote}
-                {/* {t(`quote${idx + 1}`) || item.quote} */}
               </span>
               <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
